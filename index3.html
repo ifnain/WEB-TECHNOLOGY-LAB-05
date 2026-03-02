@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Array of Objects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .topper {
+            color: green;
+        }
+
+        .average {
+            color: blue;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Records</h2>
+    <button onclick="showData()">Show Students</button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+    function showData() {
+
+        let students = [
+            { name: "Ali", marks: 85 },
+            { name: "Sara", marks: 92 },
+            { name: "Ahmed", marks: 78 }
+        ];
+
+        let total = 0;
+        let topper = students[0];
+
+        let tableHTML = `
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+        `;
+
+        for (let i = 0; i < students.length; i++) {
+            tableHTML += `
+                <tr>
+                    <td>${students[i].name}</td>
+                    <td>${students[i].marks}</td>
+                </tr>
+            `;
+
+            total += students[i].marks;
+
+            if (students[i].marks > topper.marks) {
+                topper = students[i];
+            }
+        }
+
+        tableHTML += `</table>`;
+
+        let average = total / students.length;
+
+        document.getElementById("output").innerHTML =
+            tableHTML +
+            `<div class="result average">Average Marks: ${average.toFixed(2)}</div>` +
+            `<div class="result topper">Topper: ${topper.name} (${topper.marks} marks)</div>`;
+    }
+</script>
+
+</body>
+</html>
